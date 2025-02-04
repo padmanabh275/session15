@@ -1,0 +1,29 @@
+services:
+  model-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.model
+    volumes:
+      - ./checkpoints:/app/checkpoints
+    ports:
+      - "5000:5000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  client-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    ports:
+      - "7860:7860"
+    depends_on:
+      - model-service
+
+networks:
+  default:
+    driver: bridge 

@@ -1,0 +1,17 @@
+# Base image
+FROM python:3.10-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install gradio and requests
+RUN pip install gradio requests
+
+# Copy client app
+COPY client_app.py .
+
+# Expose port for Gradio interface
+EXPOSE 7860
+
+# Run the client app
+CMD ["python", "client_app.py"] 

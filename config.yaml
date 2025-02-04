@@ -1,0 +1,85 @@
+model:
+  type: "deepseek"
+  name: "deepseek_transformer"
+  tokenizer_name: "gpt2"
+  vocab_size: 50257
+  hidden_size: 512
+  num_attention_heads: 8
+  num_key_value_heads: 2  # For MLHA (Multi-Query with Lossless Attention)
+  num_hidden_layers: 8
+  intermediate_size: 2048
+  num_experts: 4  # MoE experts
+  expert_capacity: 2  # Expert capacity factor
+  moe_layers: [2, 4, 6]  # Layers where MoE is applied
+  hidden_act: "silu"  # SwiGLU activation
+  max_position_embeddings: 512
+  initializer_range: 0.02
+  rms_norm_eps: 1.0e-5
+  use_cache: true
+  pad_token_id: null
+
+optimizer:
+  type: "adamW"
+  weight_decay: 0.01
+  adam_beta1: 0.9
+  adam_beta2: 0.95
+  adam_eps: 1.0e-8
+  torch_adam_is_fused: true
+  clip_grad: 1.0
+  accumulate_grad_in_fp32: true
+
+scheduler:
+  type: "one_cycle"
+  learning_rate: 0.001
+  warmup_steps: 50
+  max_lr: 0.001
+  pct_start: 0.02
+  anneal_strategy: "cos"
+  cycle_momentum: false
+  div_factor: 25.0
+  final_div_factor: 1000.0
+
+training:
+  output_dir: "./results"
+  batch_size: 4
+  gradient_accumulation_steps: 2
+  sequence_length: 512
+  learning_rate: 0.0003
+  max_steps: 10000
+  sample_frequency: 200
+  logging_dir: "./logs"
+  logging_steps: 1
+  save_steps: 500
+  checkpoint_dir: "checkpoints"
+  sample_prompts: [
+    "Explain quantum computing:",
+    "Write a story about a space explorer:",
+    "Describe the process of photosynthesis:",
+    "What is the theory of relativity?",
+    "How does machine learning work?"
+  ]
+
+hardware:
+  precision: "16-mixed"
+  accelerator: "gpu"
+  devices: 1
+  strategy: "auto"
+  gradient_clip: 1.0
+  cuda_memory_fraction: 0.9
+  allow_tf32: true
+  benchmark: true
+  deterministic: false
+
+data:
+  datasets:
+    - name: "wikitext"
+      path: "wikitext"
+      subset: "wikitext-103-raw-v1"
+      split_ratio: 0.01  # Use only 1% of the dataset
+      weight: 1.0
+  loading:
+    num_workers: 2
+    batch_size: 16
+    pin_memory: true
+    prefetch_factor: 2
+    persistent_workers: true 

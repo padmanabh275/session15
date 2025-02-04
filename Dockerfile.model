@@ -1,0 +1,36 @@
+# Base image with CUDA support
+FROM pytorch/pytorch:2.0.1-cuda11.7-cudnn8-runtime
+
+# Set working directory
+WORKDIR /app
+
+# Install curl and python packages
+RUN apt-get update && \
+    apt-get install -y curl && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy all required files
+COPY config.py .
+COPY config.yaml .
+COPY model.py .
+COPY requirements.txt .
+
+# Create checkpoints directory
+RUN mkdir -p checkpoints
+
+# Copy model checkpoint if exists
+COPY checkpoints/smol-lm2-final.ckpt ./checkpoints/
+
+# Install requirements
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose port for API
+EXPOSE 5000
+
+# Create API endpoint
+COPY api.py .
+
+# Add healthcheck
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD curl -f http://localhost:5000/health || exit 1
+
+CMD ["python", "api.py"] 
