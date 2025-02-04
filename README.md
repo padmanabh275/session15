@@ -68,13 +68,13 @@ docker-compose up client-service
 2. Access the web interface at `http://localhost:7860`
 
 ## Project Structure
-├── model.py # Core model implementation (MLHA, MoE)
-├── moe.py # Mixture of Experts implementation
-├── config.py # Configuration management
-├── train_script.py # Training loop and monitoring
-├── api.py # REST API for inference
-├── client_app.py # Gradio interface
-└── docker/ # Containerization
+├── model.py # Core model implementation (MLHA, MoE) <br/>
+├── moe.py # Mixture of Experts implementation <br/>
+├── config.py # Configuration management <br/>
+├── train_script.py # Training loop and monitoring <br/>
+├── api.py # REST API for inference <br/>
+├── client_app.py # Gradio interface <br/>
+└── docker/ # Containerization <br/>
 
 ## Training Data
 - Uses WikiText-103 dataset
