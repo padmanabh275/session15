@@ -52,7 +52,53 @@ python train.py
 - [Training Metrics (metrics.csv)](https://github.com/padmanabh275/session15/blob/master/metrics.csv)
 - [Hyperparameters (hparams.yaml)](https://github.com/padmanabh275/session15/blob/master/hparams.yaml))
 
+### Best Outputs
 
+Analyzing version_2:
+Found 39 generation samples
+
+Latest generations:
+
+Step 1:
+Prompt: Write a story about a space explorer:
+Generated: Write a story about a space explorer: and the 18 century . The first time of the video , and the game and the first game , but the first time in the end of the first can not found on the game , and the season , the United States , and a " .
+
+--------------------------------------------------------------------------------
+
+Step 0:
+Prompt: Explain quantum computing:
+Generated: Explain quantum computing: is in the film .
+
+--------------------------------------------------------------------------------
+
+Step 1:
+Prompt: Write a story about a space explorer:
+Generated: Write a story about a space explorer: and the 18 century . The first time of the video , and the game and the first game , but the first time in the end of the first can not found on the game , and the season , the United States , and a " .
+
+--------------------------------------------------------------------------------
+
+Analyzing version_3:
+Found 500 generation samples
+
+Latest generations:
+
+Step 2:
+Prompt: Describe the process of photosynthesis:
+Generated: Describe the process of photosynthesis:en 's wife of the world . They had been given an example and in the " in the team , she was " . " . In his wife , and the " the second on the band 's original game . He was the show 's , and the game 's death , and "
+
+--------------------------------------------------------------------------------
+
+Step 3:
+Prompt: What is the theory of relativity?
+Generated: What is the theory of relativity? , which is a single in the most of the original , and an area of the player or an attempt to be a man , and are a single . The series has a single , the same year , and the game 's only by the game 's .
+
+--------------------------------------------------------------------------------
+
+Step 4:
+Prompt: How does machine learning work?
+Generated: How does machine learning work? that " , "
+
+--------------------------------------------------------------------------------
 ### Training Features
 - Mixed precision training (16-bit)
 - Gradient accumulation
