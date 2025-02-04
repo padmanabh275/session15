@@ -52,6 +52,44 @@ python train.py
 - [Training Metrics (metrics.csv)](https://github.com/padmanabh275/session15/blob/master/metrics.csv)
 - [Hyperparameters (hparams.yaml)](https://github.com/padmanabh275/session15/blob/master/hparams.yaml))
 
+
+=== Analysis for version_2 ===
+
+Training Statistics:
+Total steps completed: 799
+Initial loss: 11.0467
+Final loss: 0.0310
+Best loss: 0.0000
+Average loss: 1.0651
+
+Loss plot saved as: training_loss_version_2.png
+
+Loss at key steps:
+Step     0: 11.0467
+Step   199: 0.8805
+Step   399: 1.3597
+Step   599: 1.2415
+Step   798: 0.0310
+
+=== Analysis for version_3 ===
+
+Training Statistics:
+Total steps completed: 10000
+Initial loss: 11.1667
+Final loss: 0.6163
+Best loss: 0.0000
+Average loss: 0.8022
+
+Loss plot saved as: training_loss_version_3.png
+
+Loss at key steps:
+Step     0: 11.1667
+Step  2500: 1.8252
+Step  5000: 0.4584
+Step  7500: 0.9362
+Step  9999: 0.6163
+
+
 ### Best Outputs
 
 Analyzing version_2:
