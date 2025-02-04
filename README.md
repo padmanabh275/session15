@@ -48,7 +48,11 @@ conda activate torch_env
 bash
 python train.py
 
-### Training Logs can be found in ([metrices.csv]) along with the ([hparams.yaml]
+### Training Logs 
+- [Training Metrics (metrics.csv)](https://github.com/padmanabh275/session15/blob/master/metrics.csv)
+- [Hyperparameters (hparams.yaml)]((https://github.com/padmanabh275/session15/blob/master/hparams.yaml))
+
+
 ### Training Features
 - Mixed precision training (16-bit)
 - Gradient accumulation
