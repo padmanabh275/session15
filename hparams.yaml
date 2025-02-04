@@ -1,0 +1,97 @@
+config: !!python/object:config.SmolLM2Config
+  data: !!python/object:config.DataConfig
+    datasets:
+    - !!python/object:config.DatasetConfig
+      name: wikitext
+      path: wikitext
+      split_ratio: 1.0
+      subset: wikitext-2-raw-v1
+      weight: 1.0
+    - !!python/object:config.DatasetConfig
+      name: wikitext
+      path: wikitext
+      split_ratio: 0.01
+      subset: wikitext-103-raw-v1
+      weight: 1.0
+    loading: !!python/object:config.DataLoadingConfig
+      batch_size: 16
+      num_workers: 2
+      persistent_workers: true
+      pin_memory: true
+      prefetch_factor: 2
+  hardware: !!python/object:config.HardwareConfig
+    accelerator: gpu
+    allow_tf32: true
+    benchmark: true
+    cuda_memory_fraction: 0.9
+    deterministic: false
+    devices: 1
+    gradient_clip: 1.0
+    precision: 16-mixed
+    strategy: auto
+  model: !!python/object:config.ModelConfig
+    expert_capacity: 2
+    hidden_act: silu
+    hidden_size: 512
+    initializer_range: 0.02
+    intermediate_size: 2048
+    max_length: 512
+    max_position_embeddings: 512
+    moe_layers:
+    - 2
+    - 4
+    - 6
+    name: deepseek_transformer
+    num_attention_heads: 8
+    num_experts: 4
+    num_hidden_layers: 8
+    num_key_value_heads: 2
+    pad_token_id: null
+    rms_norm_eps: 1.0e-05
+    tokenizer_name: gpt2
+    type: deepseek
+    use_cache: true
+    vocab_size: 50257
+  optimizer: !!python/object:config.OptimizerConfig
+    accumulate_grad_in_fp32: true
+    adam_beta1: 0.9
+    adam_beta2: 0.95
+    adam_eps: 1.0e-08
+    clip_grad: 1.0
+    torch_adam_is_fused: true
+    type: adamW
+    weight_decay: 0.01
+  scheduler: !!python/object:config.SchedulerConfig
+    anneal_strategy: cos
+    cycle_momentum: false
+    div_factor: 25.0
+    final_div_factor: 1000.0
+    learning_rate: 0.001
+    max_lr: 0.001
+    pct_start: 0.02
+    type: one_cycle
+    warmup_steps: 50
+  training: !!python/object:config.TrainingConfig
+    batch_size: 4
+    checkpoint_dir: checkpoints
+    first_phase_steps: 5000
+    gradient_accumulation_steps: 2
+    learning_rate: 0.0003
+    logging_dir: ./logs
+    logging_steps: 1
+    max_generate_length: 100
+    max_steps: 10000
+    micro_batch_size: 1
+    output_dir: ./results
+    sample_frequency: 200
+    sample_prompt: 'Explain what machine learning is:'
+    sample_prompts:
+    - 'Explain quantum computing:'
+    - 'Write a story about a space explorer:'
+    - 'Describe the process of photosynthesis:'
+    - What is the theory of relativity?
+    - How does machine learning work?
+    save_steps: 500
+    second_phase_sample_frequency: 10
+    second_phase_steps: 50
+    sequence_length: 512
